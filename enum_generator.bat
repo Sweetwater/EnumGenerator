@@ -67,6 +67,20 @@ code = <<EOS
   bool Contains(int v)         const {return v >= 0 && v < Count;}
   bool Contains(const char* v) const {return Map()->count(0) != 0 || Map2()->count(0) != 0;}
 
+  template<typename DataT>
+  struct Data {
+    DataT& operator[](int i) {return Values[i];} 
+    union {
+      std::array<DataT, Count> Values;
+      struct {DataT
+% elements.take(elements.size-1).each {|x|
+        <%= x %>,
+% }
+        $last_element;
+      };
+    };
+  };
+
   typedef std::array<$enum_name, Count> Array_;
   static const Array_* Array()
   {
