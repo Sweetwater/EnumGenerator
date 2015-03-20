@@ -50,6 +50,10 @@ code = <<EOS
 % }
 
 % elements.each {|x|
+  $enum_name Set<%= x %>() {return Value = k<%= x %>;}
+% }
+
+% elements.each {|x|
   bool Is<%= x %>() const {return Value == k<%= x %>;}
 % }
 
